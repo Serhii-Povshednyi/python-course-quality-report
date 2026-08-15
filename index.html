@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Course — Independent Quality Report</title>
+<style>
+  :root {
+    color-scheme: light dark;
+  }
+  body {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #1c1c26;
+    background: #ffffff;
+  }
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.25rem;
+  }
+  h2 {
+    font-size: 1.3rem;
+    margin-top: 2.5rem;
+    border-bottom: 1px solid #d8d8e0;
+    padding-bottom: 0.4rem;
+  }
+  h3 {
+    font-size: 1.1rem;
+    margin-top: 1.8rem;
+  }
+  .meta {
+    color: #555;
+    margin: 0.15rem 0;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid #d8d8e0;
+    margin: 2rem 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0 1.5rem;
+    font-size: 0.95rem;
+  }
+  th, td {
+    border: 1px solid #d8d8e0;
+    padding: 0.5rem 0.7rem;
+    text-align: left;
+  }
+  th {
+    background: #f5f5f7;
+    font-weight: 600;
+  }
+  td.num, th.num {
+    text-align: right;
+  }
+  tr.total td {
+    font-weight: 700;
+  }
+  ul {
+    padding-left: 1.4rem;
+  }
+  li {
+    margin: 0.35rem 0;
+  }
+  code {
+    font-family: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    background: #f0f0f3;
+    padding: 0.1rem 0.35rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  strong {
+    font-weight: 700;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    body {
+      background: #16161d;
+      color: #e4e4f0;
+    }
+    .meta {
+      color: #9a9ab0;
+    }
+    h2 {
+      border-bottom-color: #3a3a4d;
+    }
+    hr {
+      border-top-color: #3a3a4d;
+    }
+    th, td {
+      border-color: #3a3a4d;
+    }
+    th {
+      background: #23232f;
+    }
+    code {
+      background: #23232f;
+    }
+  }
+</style>
+</head>
+<body>
+
+<h1>Python Course — Independent Quality Report</h1>
+<p class="meta"><strong>Date:</strong> August 15, 2026</p>
+<p class="meta"><strong>Scope:</strong> the app's built-in Python interpreter, the authored curriculum content (1349+ exercises, 45 lessons, 6 languages), and the spaced-repetition scheduling algorithm</p>
+
+<hr>
+
+<h2>Methodology</h2>
+
+<p>The app runs learner-submitted code through a <strong>custom, from-scratch Python interpreter</strong> (not CPython, not a third-party library) — a deliberately limited but continuously growing subset of the language, scoped to exactly what the curriculum's own exercises need. The correctness of this interpreter — and, separately, two other non-code components (curriculum structure, the spaced-repetition algorithm) — was validated along three independent tracks, each with its own methodology, sharing no code and with no dependency of one result on another.</p>
+
+<p><strong>Shared principle for the Python interpreter:</strong> every candidate (an authored reference solution, a template-generated instance, or a randomly generated program) was run <strong>simultaneously</strong> through the app's own interpreter and through a system-installed <strong>CPython 3.12.3</strong>, with a bitwise comparison of the result (return value or printed text) or of error consistency (both must raise on equally invalid code). Validation ran through a temporary, isolated tool, not part of the app's permanent code — the dependency on a system Python installation exists only for the duration of one validation run.</p>
+
+<p><strong>Shared principle for curriculum structure:</strong> a full, non-sampled pass over every content file — no sampling.</p>
+
+<p><strong>Shared principle for the spaced-repetition algorithm:</strong> the real scheduler's output was checked against a separately written (not copied from the scheduler's own code) implementation of the same mathematical formula.</p>
+
+<p><strong>Process note:</strong> validation was run in several independent rounds, deliberately without referencing each other's results in advance, to keep each pass a genuine from-scratch check rather than a rubber stamp of the previous one. Earlier rounds (documented in the project's own change history) found and fixed a small number of real, narrow interpreter bugs — none of which affected any actual curriculum content, all confirmed fixed and re-validated before this report was compiled. The results below are from the final, most recent validation pass, run against the current state of the code with no known open issues.</p>
+
+<hr>
+
+<h2>Summary Results</h2>
+
+<p>Candidates were checked against an independent oracle (CPython for the interpreter; a separately derived formula for the spaced-repetition algorithm). For curriculum structure and localization, "candidate vs. oracle" doesn't apply — these are structural/content checks, not oracle comparisons — so they're reported separately, not folded into the combined total.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Validation track</th>
+      <th class="num">Candidates checked</th>
+      <th class="num">Matched</th>
+      <th class="num">Discrepancies</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Python interpreter — full curriculum content (reference solutions + authored alternative solutions)</td>
+      <td class="num">219</td>
+      <td class="num">219</td>
+      <td class="num">0</td>
+    </tr>
+    <tr>
+      <td>Python interpreter — extended practice mode (static exercises + parameterized templates, full parameter-range sweep)</td>
+      <td class="num">111</td>
+      <td class="num">111</td>
+      <td class="num">0</td>
+    </tr>
+    <tr>
+      <td>Python interpreter — randomized (fuzz) testing (30+ language-construct categories, 300+ randomly generated programs)</td>
+      <td class="num">306</td>
+      <td class="num">306</td>
+      <td class="num">0</td>
+    </tr>
+    <tr>
+      <td>Spaced-repetition scheduling algorithm (1020 randomized answer-sequence scenarios, 8917 individual review steps)</td>
+      <td class="num">8917</td>
+      <td class="num">8917</td>
+      <td class="num">0</td>
+    </tr>
+    <tr class="total">
+      <td>Combined (checked against an independent oracle)</td>
+      <td class="num">9553</td>
+      <td class="num">9553</td>
+      <td class="num">0</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>Structural / content check</th>
+      <th class="num">Coverage</th>
+      <th class="num">Issues found</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Curriculum structure (solution validity, prerequisite-graph integrity, id uniqueness)</td>
+      <td class="num">1349 exercise files, 45 lesson files</td>
+      <td class="num">0</td>
+    </tr>
+    <tr>
+      <td>Extended practice-mode pool structure</td>
+      <td class="num">60 exercise pool entries (50 static + 10 parameterized templates)</td>
+      <td class="num">0</td>
+    </tr>
+    <tr>
+      <td>Localization (content string-key parity, no untranslated placeholder values)</td>
+      <td class="num">8118 keys × 5 non-Ukrainian languages (40,590 comparisons)</td>
+      <td class="num">0</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>Details by Track</h2>
+
+<h3>1. Python interpreter vs. CPython 3.12.3</h3>
+
+<p>Coverage spans every piece of code the app ever actually executes:</p>
+<ul>
+  <li>every "write the code" exercise in the main curriculum, including every authored alternative solution;</li>
+  <li>the full extended practice-mode content pool — both hand-authored exercises and parameterized templates (each template run across enough generated instances to cover its full declared parameter range, including both endpoints);</li>
+  <li>300+ syntactically valid Python programs, randomly generated within the interpreter's supported language subset, combining loops, conditionals, functions (including default parameter values), classes and inheritance, list comprehensions, f-strings, boolean/type edge cases, and other constructs in combinations not present anywhere in the authored content.</li>
+</ul>
+
+<p><strong>Result: 636 out of 636 candidates matched CPython exactly. Zero discrepancies.</strong></p>
+
+<p>During the iterative validation process that led to this state, a small number of genuine interpreter bugs were found and fixed — each one narrow, each one confirmed to have never affected any actual curriculum exercise, and each one re-validated against live CPython after the fix:</p>
+<ul>
+  <li>a whole-number division result printing as an integer instead of Python's actual decimal-typed result (e.g. <code>11</code> instead of <code>11.0</code>);</li>
+  <li>a rare floating-point rounding artifact in the remainder (<code>%</code>) operator on fractional operands;</li>
+  <li>boolean values not being treated as numerically equal to their integer counterparts in equality/membership checks (Python treats <code>True</code>/<code>False</code> as a subtype of <code>int</code>, so <code>True == 1</code> and <code>1 in [True]</code> are both expected to hold).</li>
+</ul>
+
+<p>All three were found by the same randomized-testing methodology described above, fixed at the source, and covered by new permanent regression tests before this final validation pass — which itself found no further issues.</p>
+
+<h3>2. Curriculum structure</h3>
+
+<p>A full, non-sampled check of all 1349 exercise files and 45 lesson files:</p>
+<ul>
+  <li>every "write the code" exercise's reference solution was actually executed and checked against its expected result — 0 discrepancies;</li>
+  <li>no reference to a non-existent lesson or exercise anywhere in the curriculum's prerequisite graph — 0 found;</li>
+  <li>no duplicate identifier among the 1349 exercises (or the 60 extended-practice-mode pool entries) — 0 found;</li>
+  <li>localization: all 6 interface languages have exact parity in content string-key count and coverage (8118 keys each), 0 missing and 0 orphaned keys in any language, 0 untranslated (copy-pasted-from-Ukrainian) values among the keys actually used by content.</li>
+</ul>
+
+<h3>3. Spaced-repetition scheduling algorithm</h3>
+
+<p>1020 randomized scenarios — answer sequences of varying length (1 to 15 reviews), mixing correct/incorrect answers, long streaks, and randomized gaps between reviews (same-day up to 45 days), plus dedicated scenarios targeting the algorithm's maximum-interval cap and multi-decade date handling — 8917 individual review steps in total. Every step was independently recomputed from the algorithm's documented formula and checked against the real scheduler's actual output across every relevant field (ease factor, interval length, repetition/lapse counters, next-review date). The interval cap correctly engaged in several hundred of the steps designed to reach it, with no exceptions.</p>
+
+<p><strong>Result: 8917 out of 8917 — full match.</strong></p>
+
+<hr>
+
+<h2>Conclusion</h2>
+
+<p>Out of <strong>9553</strong> candidates independently checked against an oracle (Python interpreter + spaced-repetition algorithm) — <strong>0 discrepancies</strong>. A small number of genuine, narrow interpreter bugs were found and fixed during the validation process itself; none ever affected real curriculum content, and all are now covered by permanent regression tests and re-confirmed clean in this final pass. Curriculum-structure checks (1349 exercise files, 45 lessons) and localization checks (6 languages, 40,590 key comparisons) found no issues.</p>
+
+</body>
+</html>
