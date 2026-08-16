@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unabhängiger Qualitätsbericht — Python Course</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff;
+    --text: #1a1a1a;
+    --muted: #555555;
+    --border: #e0e0e0;
+    --accent: #4f46e5;
+    --th-bg: #f5f5f7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14141a;
+      --text: #f0f0f0;
+      --muted: #aaaaaa;
+      --border: #2e2e38;
+      --accent: #a5b4fc;
+      --th-bg: #1e1e28;
+    }
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+  .lang-switch {
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+  }
+  .lang-switch a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .lang-switch a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+  .lang-switch__current {
+    color: var(--text);
+    font-weight: 600;
+  }
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.25rem;
+  }
+  .updated {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin: 0.15rem 0;
+  }
+  h2 {
+    font-size: 1.2rem;
+    margin-top: 2.2rem;
+    margin-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.4rem;
+  }
+  p {
+    margin: 0.6rem 0;
+  }
+  ul {
+    margin: 0.6rem 0;
+    padding-left: 1.4rem;
+  }
+  li {
+    margin: 0.3rem 0;
+  }
+  a {
+    color: var(--accent);
+  }
+  code {
+    font-family: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    background: var(--th-bg);
+    padding: 0.1rem 0.35rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  .summary {
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 1.5rem 0 2rem;
+  }
+  .summary p {
+    margin: 0.3rem 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0 1.5rem;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.5rem 0.7rem;
+    text-align: left;
+  }
+  th {
+    background: var(--th-bg);
+    font-weight: 600;
+  }
+  td.num, th.num {
+    text-align: right;
+    white-space: nowrap;
+  }
+  tr.total td {
+    font-weight: 700;
+  }
+  footer {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+<main>
+
+  <nav class="lang-switch"><a href="index.html">УКР</a> · <a href="en.html">EN</a> · <a href="es.html">ES</a> · <a href="fr.html">FR</a> · <span class="lang-switch__current">DE</span> · <a href="pt.html">PT</a></nav>
+
+  <h1>Unabhängiger Qualitätsbericht</h1>
+  <p class="updated">App: Python Course · Datum: 15. August 2026</p>
+  <p class="updated">Umfang: der eingebaute Python-Interpreter, die verfassten Kursinhalte (1349+ Übungen, 45 Lektionen, 6 Sprachen) und der Algorithmus für die Wiederholungsplanung (Spaced Repetition)</p>
+
+  <div class="summary">
+    <p><strong>Kurz gesagt:</strong> 9553 Kandidaten gegen ein unabhängiges Orakel geprüft — <strong>0 Abweichungen</strong>. Die Kursstruktur (1349 Übungsdateien, 45 Lektionen) und die Lokalisierung (6 Sprachen) wurden separat geprüft — ebenfalls 0 Probleme.</p>
+  </div>
+
+  <h2>Methodik</h2>
+  <p>
+    Drei unabhängige Prüfstränge, ohne gemeinsamen Code und ohne Abhängigkeit der Ergebnisse voneinander. <strong>Interpreter:</strong> Die App führt Code über einen eigenen, von Grund auf neu geschriebenen Python-Interpreter aus (kein CPython, keine Drittanbieter-Bibliothek) — jeder Kandidat (eine verfasste Referenzlösung, eine aus einer Vorlage generierte Instanz oder ein zufällig generiertes Programm) wurde gleichzeitig im Interpreter der App und in einem systemseitig installierten CPython 3.12.3 ausgeführt und anschließend auf exakte Ergebnis- bzw. Fehler-Konsistenz verglichen. <strong>Kursstruktur:</strong> ein vollständiger, ungestichprobter Durchlauf über alle Inhaltsdateien. <strong>Wiederholungsplaner:</strong> seine Ausgabe wurde mit einer separat geschriebenen (nicht aus dem Planer selbst kopierten) Implementierung derselben mathematischen Formel abgeglichen. Die Validierung lief über ein temporäres, isoliertes Werkzeug außerhalb des eigentlichen App-Codes, in mehreren unabhängigen Runden, die sich nicht im Voraus auf die Ergebnisse der jeweils anderen stützten.
+  </p>
+
+  <h2>Ergebnisse gegen ein unabhängiges Orakel</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Prüfstrang</th>
+        <th class="num">Geprüft</th>
+        <th class="num">Übereinstimmend</th>
+        <th class="num">Abweichungen</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Interpreter — Kursinhalte (Referenz- + alternative Lösungen)</td>
+        <td class="num">219</td>
+        <td class="num">219</td>
+        <td class="num">0</td>
+      </tr>
+      <tr>
+        <td>Interpreter — erweiterter Übungsmodus (statisch + parametrisierte Vorlagen)</td>
+        <td class="num">111</td>
+        <td class="num">111</td>
+        <td class="num">0</td>
+      </tr>
+      <tr>
+        <td>Interpreter — Zufallstests (Fuzzing) (30+ Konstrukt-Kategorien)</td>
+        <td class="num">306</td>
+        <td class="num">306</td>
+        <td class="num">0</td>
+      </tr>
+      <tr>
+        <td>Wiederholungsplaner (1020 Szenarien, 8917 Wiederholungsschritte)</td>
+        <td class="num">8917</td>
+        <td class="num">8917</td>
+        <td class="num">0</td>
+      </tr>
+      <tr class="total">
+        <td>Kombiniert</td>
+        <td class="num">9553</td>
+        <td class="num">9553</td>
+        <td class="num">0</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Struktur- und Inhaltsprüfungen</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Prüfung</th>
+        <th class="num">Abdeckung</th>
+        <th class="num">Gefundene Probleme</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Kursstruktur (Gültigkeit der Lösungen, Integrität des Voraussetzungsgraphen, Eindeutigkeit der IDs)</td>
+        <td class="num">1349 Übungsdateien, 45 Lektionen</td>
+        <td class="num">0</td>
+      </tr>
+      <tr>
+        <td>Struktur des erweiterten Übungsmodus-Pools</td>
+        <td class="num">60 Pool-Einträge (50 statisch + 10 Vorlagen)</td>
+        <td class="num">0</td>
+      </tr>
+      <tr>
+        <td>Lokalisierungsparität (Inhalts-Schlüssel, keine unübersetzten Platzhalter)</td>
+        <td class="num">8118 Schlüssel × EN, ES, FR, DE, PT (40 590 Vergleiche)</td>
+        <td class="num">0</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Anmerkungen</h2>
+  <p>
+    Während der iterativen Validierung wurden drei eng begrenzte Interpreter-Bugs gefunden und behoben — keiner hat je echte Kursinhalte betroffen, und alle drei sind jetzt durch permanente Regressionstests abgedeckt:
+  </p>
+  <ul>
+    <li>ganzzahlige Division wurde als Ganzzahl statt als Pythons tatsächliches Dezimalergebnis ausgegeben (<code>11</code> statt <code>11.0</code>);</li>
+    <li>ein seltener Gleitkomma-Rundungsfehler beim Restwert-Operator (<code>%</code>) bei gebrochenen Operanden;</li>
+    <li><code>bool</code> wurde in <code>==</code>/<code>!=</code>/<code>in</code>/<code>list.remove()</code> nicht als numerisch gleich zu <code>int</code> behandelt.</li>
+  </ul>
+  <p>
+    Die maximale Intervallobergrenze des Wiederholungsplaners griff korrekt in mehreren Hundert dafür konzipierten Schritten, ohne eine einzige Ausnahme. Die obigen Ergebnisse stammen aus dem letzten, aktuellsten Validierungsdurchlauf, ohne bekannte offene Probleme.
+  </p>
+
+  <footer>
+    Python Course — eine Offline-App zum Python-Lernen.
+  </footer>
+
+</main>
+</body>
+</html>

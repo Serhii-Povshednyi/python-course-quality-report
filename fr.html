@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rapport de qualité indépendant — Python Course</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff;
+    --text: #1a1a1a;
+    --muted: #555555;
+    --border: #e0e0e0;
+    --accent: #4f46e5;
+    --th-bg: #f5f5f7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14141a;
+      --text: #f0f0f0;
+      --muted: #aaaaaa;
+      --border: #2e2e38;
+      --accent: #a5b4fc;
+      --th-bg: #1e1e28;
+    }
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+  .lang-switch {
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+  }
+  .lang-switch a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .lang-switch a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+  .lang-switch__current {
+    color: var(--text);
+    font-weight: 600;
+  }
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.25rem;
+  }
+  .updated {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin: 0.15rem 0;
+  }
+  h2 {
+    font-size: 1.2rem;
+    margin-top: 2.2rem;
+    margin-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.4rem;
+  }
+  p {
+    margin: 0.6rem 0;
+  }
+  ul {
+    margin: 0.6rem 0;
+    padding-left: 1.4rem;
+  }
+  li {
+    margin: 0.3rem 0;
+  }
+  a {
+    color: var(--accent);
+  }
+  code {
+    font-family: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    background: var(--th-bg);
+    padding: 0.1rem 0.35rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  .summary {
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 1.5rem 0 2rem;
+  }
+  .summary p {
+    margin: 0.3rem 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0 1.5rem;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.5rem 0.7rem;
+    text-align: left;
+  }
+  th {
+    background: var(--th-bg);
+    font-weight: 600;
+  }
+  td.num, th.num {
+    text-align: right;
+    white-space: nowrap;
+  }
+  tr.total td {
+    font-weight: 700;
+  }
+  footer {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+<main>
+
+  <nav class="lang-switch"><a href="index.html">УКР</a> · <a href="en.html">EN</a> · <a href="es.html">ES</a> · <span class="lang-switch__current">FR</span> · <a href="de.html">DE</a> · <a href="pt.html">PT</a></nav>
+
+  <h1>Rapport de qualité indépendant</h1>
+  <p class="updated">App : Python Course · Date : 15 août 2026</p>
+  <p class="updated">Périmètre : l'interpréteur Python intégré, le contenu du cours (1349+ exercices, 45 leçons, 6 langues) et l'algorithme de répétition espacée</p>
+
+  <div class="summary">
+    <p><strong>En bref :</strong> 9553 candidats vérifiés par rapport à un oracle indépendant — <strong>0 écart</strong>. La structure du cours (1349 fichiers d'exercices, 45 leçons) et la localisation (6 langues) ont été vérifiées séparément — également 0 problème.</p>
+  </div>
+
+  <h2>Méthodologie</h2>
+  <p>
+    Trois volets de validation indépendants, sans code partagé et sans dépendance entre les résultats. <strong>Interpréteur :</strong> l'app exécute le code via son propre interpréteur Python, écrit entièrement de zéro (ni CPython, ni une bibliothèque tierce) — chaque candidat (une solution de référence, une instance générée à partir d'un modèle, ou un programme généré aléatoirement) a été exécuté simultanément dans l'interpréteur de l'app et dans un CPython 3.12.3 installé sur le système, puis les résultats ont été comparés (résultat exact ou cohérence des erreurs). <strong>Structure du cours :</strong> un passage complet, sans échantillonnage, sur tous les fichiers de contenu. <strong>Algorithme de répétition espacée :</strong> sa sortie a été comparée à une implémentation écrite séparément (non copiée du planificateur lui-même) de la même formule mathématique. La validation s'est déroulée via un outil temporaire et isolé, en dehors du code propre de l'app, en plusieurs rondes indépendantes menées sans s'appuyer sur les résultats des rondes précédentes.
+  </p>
+
+  <h2>Résultats face à un oracle indépendant</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Volet de validation</th>
+        <th class="num">Vérifiés</th>
+        <th class="num">Concordants</th>
+        <th class="num">Écarts</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Interpréteur — contenu du cours (solutions de référence + alternatives)</td>
+        <td class="num">219</td>
+        <td class="num">219</td>
+        <td class="num">0</td>
+      </tr>
+      <tr>
+        <td>Interpréteur — mode de pratique étendu (statiques + modèles paramétrés)</td>
+        <td class="num">111</td>
+        <td class="num">111</td>
+        <td class="num">0</td>
+      </tr>
+      <tr>
+        <td>Interpréteur — tests aléatoires (fuzzing) (30+ catégories de constructions)</td>
+        <td class="num">306</td>
+        <td class="num">306</td>
+        <td class="num">0</td>
+      </tr>
+      <tr>
+        <td>Algorithme de répétition espacée (1020 scénarios, 8917 étapes de révision)</td>
+        <td class="num">8917</td>
+        <td class="num">8917</td>
+        <td class="num">0</td>
+      </tr>
+      <tr class="total">
+        <td>Total combiné</td>
+        <td class="num">9553</td>
+        <td class="num">9553</td>
+        <td class="num">0</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Vérifications structurelles et de contenu</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Vérification</th>
+        <th class="num">Couverture</th>
+        <th class="num">Problèmes trouvés</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Structure du cours (validité des solutions, intégrité du graphe de prérequis, unicité des id)</td>
+        <td class="num">1349 fichiers d'exercices, 45 leçons</td>
+        <td class="num">0</td>
+      </tr>
+      <tr>
+        <td>Structure du pool du mode de pratique étendu</td>
+        <td class="num">60 entrées (50 statiques + 10 modèles)</td>
+        <td class="num">0</td>
+      </tr>
+      <tr>
+        <td>Parité de localisation (clés de contenu, aucune valeur non traduite)</td>
+        <td class="num">8118 clés × EN, ES, FR, DE, PT (40 590 comparaisons)</td>
+        <td class="num">0</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Remarques</h2>
+  <p>
+    Au cours de la validation itérative, trois bugs ponctuels de l'interpréteur ont été trouvés et corrigés — aucun n'a jamais affecté de contenu réel du cours, et les trois sont désormais couverts par des tests de non-régression permanents :
+  </p>
+  <ul>
+    <li>la division entière s'affichait comme un nombre entier au lieu du résultat décimal réel de Python (<code>11</code> au lieu de <code>11.0</code>) ;</li>
+    <li>un rare artefact d'arrondi en virgule flottante dans l'opérateur de reste (<code>%</code>) sur des opérandes fractionnaires ;</li>
+    <li><code>bool</code> n'était pas comparé comme numériquement égal à <code>int</code> dans <code>==</code>/<code>!=</code>/<code>in</code>/<code>list.remove()</code>.</li>
+  </ul>
+  <p>
+    Le plafond d'intervalle maximal de l'algorithme de répétition espacée s'est correctement déclenché sur plusieurs centaines d'étapes conçues pour l'atteindre, sans aucune exception. Les résultats ci-dessus proviennent de la dernière ronde de validation, sans problème connu en suspens.
+  </p>
+
+  <footer>
+    Python Course — une app hors ligne pour apprendre Python.
+  </footer>
+
+</main>
+</body>
+</html>

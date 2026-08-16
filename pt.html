@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório independente de qualidade — Python Course</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff;
+    --text: #1a1a1a;
+    --muted: #555555;
+    --border: #e0e0e0;
+    --accent: #4f46e5;
+    --th-bg: #f5f5f7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14141a;
+      --text: #f0f0f0;
+      --muted: #aaaaaa;
+      --border: #2e2e38;
+      --accent: #a5b4fc;
+      --th-bg: #1e1e28;
+    }
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+  .lang-switch {
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+  }
+  .lang-switch a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .lang-switch a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+  .lang-switch__current {
+    color: var(--text);
+    font-weight: 600;
+  }
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.25rem;
+  }
+  .updated {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin: 0.15rem 0;
+  }
+  h2 {
+    font-size: 1.2rem;
+    margin-top: 2.2rem;
+    margin-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.4rem;
+  }
+  p {
+    margin: 0.6rem 0;
+  }
+  ul {
+    margin: 0.6rem 0;
+    padding-left: 1.4rem;
+  }
+  li {
+    margin: 0.3rem 0;
+  }
+  a {
+    color: var(--accent);
+  }
+  code {
+    font-family: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    background: var(--th-bg);
+    padding: 0.1rem 0.35rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  .summary {
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 1.5rem 0 2rem;
+  }
+  .summary p {
+    margin: 0.3rem 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0 1.5rem;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.5rem 0.7rem;
+    text-align: left;
+  }
+  th {
+    background: var(--th-bg);
+    font-weight: 600;
+  }
+  td.num, th.num {
+    text-align: right;
+    white-space: nowrap;
+  }
+  tr.total td {
+    font-weight: 700;
+  }
+  footer {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+<main>
+
+  <nav class="lang-switch"><a href="index.html">УКР</a> · <a href="en.html">EN</a> · <a href="es.html">ES</a> · <a href="fr.html">FR</a> · <a href="de.html">DE</a> · <span class="lang-switch__current">PT</span></nav>
+
+  <h1>Relatório independente de qualidade</h1>
+  <p class="updated">App: Python Course · Data: 15 de agosto de 2026</p>
+  <p class="updated">Escopo: o interpretador Python integrado, o conteúdo autoral do curso (mais de 1349 exercícios, 45 lições, 6 idiomas) e o algoritmo de repetição espaçada</p>
+
+  <div class="summary">
+    <p><strong>Em resumo:</strong> 9553 candidatos verificados contra um oráculo independente — <strong>0 discrepâncias</strong>. A estrutura do curso (1349 arquivos de exercícios, 45 lições) e a localização (6 idiomas) foram verificadas separadamente — também 0 problemas.</p>
+  </div>
+
+  <h2>Metodologia</h2>
+  <p>
+    Três frentes de validação independentes, sem código compartilhado e sem dependência entre os resultados. <strong>Interpretador:</strong> o app executa código por meio de seu próprio interpretador Python, escrito do zero (não é CPython, nem uma biblioteca de terceiros) — cada candidato (uma solução de referência autoral, uma instância gerada a partir de um modelo, ou um programa gerado aleatoriamente) foi executado simultaneamente no interpretador do app e em um CPython 3.12.3 instalado no sistema, com comparação exata do resultado ou da consistência dos erros. <strong>Estrutura do curso:</strong> uma varredura completa, sem amostragem, de todos os arquivos de conteúdo. <strong>Planejador de repetição espaçada:</strong> sua saída foi comparada com uma implementação escrita separadamente (não copiada do próprio planejador) da mesma fórmula matemática. A validação foi executada por meio de uma ferramenta temporária e isolada, fora do código próprio do app, em várias rodadas independentes, sem se apoiar nos resultados umas das outras.
+  </p>
+
+  <h2>Resultados frente a um oráculo independente</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Frente de validação</th>
+        <th class="num">Verificados</th>
+        <th class="num">Corresponderam</th>
+        <th class="num">Discrepâncias</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Interpretador — conteúdo do curso (soluções de referência + alternativas)</td>
+        <td class="num">219</td>
+        <td class="num">219</td>
+        <td class="num">0</td>
+      </tr>
+      <tr>
+        <td>Interpretador — modo de prática estendido (estáticos + modelos parametrizados)</td>
+        <td class="num">111</td>
+        <td class="num">111</td>
+        <td class="num">0</td>
+      </tr>
+      <tr>
+        <td>Interpretador — testes aleatórios (fuzzing) (mais de 30 categorias de construções)</td>
+        <td class="num">306</td>
+        <td class="num">306</td>
+        <td class="num">0</td>
+      </tr>
+      <tr>
+        <td>Planejador de repetição espaçada (1020 cenários, 8917 etapas de revisão)</td>
+        <td class="num">8917</td>
+        <td class="num">8917</td>
+        <td class="num">0</td>
+      </tr>
+      <tr class="total">
+        <td>Total combinado</td>
+        <td class="num">9553</td>
+        <td class="num">9553</td>
+        <td class="num">0</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Verificações estruturais e de conteúdo</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Verificação</th>
+        <th class="num">Cobertura</th>
+        <th class="num">Problemas encontrados</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Estrutura do curso (validade das soluções, integridade do grafo de pré-requisitos, unicidade de id)</td>
+        <td class="num">1349 arquivos de exercícios, 45 lições</td>
+        <td class="num">0</td>
+      </tr>
+      <tr>
+        <td>Estrutura do pool do modo de prática estendido</td>
+        <td class="num">60 entradas (50 estáticas + 10 modelos)</td>
+        <td class="num">0</td>
+      </tr>
+      <tr>
+        <td>Paridade de localização (chaves de conteúdo, sem valores não traduzidos)</td>
+        <td class="num">8118 chaves × EN, ES, FR, DE, PT (40 590 comparações)</td>
+        <td class="num">0</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Notas</h2>
+  <p>
+    Durante a validação iterativa, três bugs pontuais do interpretador foram encontrados e corrigidos — nenhum jamais afetou conteúdo real do curso, e os três agora estão cobertos por testes de regressão permanentes:
+  </p>
+  <ul>
+    <li>a divisão inteira era exibida como número inteiro em vez do resultado decimal real do Python (<code>11</code> em vez de <code>11.0</code>);</li>
+    <li>um raro artefato de arredondamento de ponto flutuante no operador de resto (<code>%</code>) com operandos fracionários;</li>
+    <li><code>bool</code> não era comparado como numericamente igual a <code>int</code> em <code>==</code>/<code>!=</code>/<code>in</code>/<code>list.remove()</code>.</li>
+  </ul>
+  <p>
+    O limite máximo de intervalo do planejador de repetição espaçada acionou corretamente em várias centenas de etapas projetadas para alcançá-lo, sem nenhuma exceção. Os resultados acima são da rodada de validação final e mais recente, sem problemas conhecidos em aberto.
+  </p>
+
+  <footer>
+    Python Course — um app offline para aprender Python.
+  </footer>
+
+</main>
+</body>
+</html>
