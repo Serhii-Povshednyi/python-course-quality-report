@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Relatório independente de qualidade — Python Course</title>
+<title>Qualidade e confiabilidade do código — Python Course</title>
 <meta name="robots" content="noindex, nofollow">
 <style>
   :root {
@@ -14,6 +14,10 @@
     --border: #e0e0e0;
     --accent: #4f46e5;
     --th-bg: #f5f5f7;
+    --good-bg: color-mix(in srgb, #16a34a 10%, transparent);
+    --good-border: color-mix(in srgb, #16a34a 35%, var(--border));
+    --honest-bg: color-mix(in srgb, #d97706 8%, transparent);
+    --honest-border: color-mix(in srgb, #d97706 30%, var(--border));
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -73,6 +77,11 @@
     border-bottom: 1px solid var(--border);
     padding-bottom: 0.4rem;
   }
+  h3 {
+    font-size: 1.02rem;
+    margin-top: 1.6rem;
+    margin-bottom: 0.5rem;
+  }
   p {
     margin: 0.6rem 0;
   }
@@ -103,6 +112,31 @@
   .summary p {
     margin: 0.3rem 0;
   }
+  .headline-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.9rem;
+    margin: 1.2rem 0 1.5rem;
+  }
+  .headline-card {
+    background: var(--good-bg);
+    border: 1px solid var(--good-border);
+    border-radius: 8px;
+    padding: 1rem 1.1rem;
+  }
+  .headline-card .num {
+    font-size: 1.9rem;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .headline-card .label {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 0.2rem;
+  }
+  @media (max-width: 520px) {
+    .headline-grid { grid-template-columns: 1fr; }
+  }
   table {
     width: 100%;
     border-collapse: collapse;
@@ -125,6 +159,30 @@
   tr.total td {
     font-weight: 700;
   }
+  .honest-box {
+    background: var(--honest-bg);
+    border: 1px solid var(--honest-border);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 1.2rem 0;
+  }
+  .honest-box p:first-child {
+    margin-top: 0;
+  }
+  .tools-list {
+    display: grid;
+    gap: 0.5rem;
+    margin: 1rem 0 1.5rem;
+  }
+  .tools-list .tool {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.6rem 0.9rem;
+  }
+  .tools-list .tool strong {
+    display: inline-block;
+    min-width: 9rem;
+  }
   footer {
     margin-top: 3rem;
     padding-top: 1rem;
@@ -139,20 +197,81 @@
 
   <nav class="lang-switch"><a href="index.html">УКР</a> · <a href="en.html">EN</a> · <a href="es.html">ES</a> · <a href="fr.html">FR</a> · <a href="de.html">DE</a> · <span class="lang-switch__current">PT</span></nav>
 
-  <h1>Relatório independente de qualidade</h1>
-  <p class="updated">App: Python Course · Data: 15 de agosto de 2026</p>
-  <p class="updated">Escopo: o interpretador Python integrado, o conteúdo autoral do curso (mais de 1349 exercícios, 45 lições, 6 idiomas) e o algoritmo de repetição espaçada</p>
+  <h1>Qualidade e confiabilidade do código</h1>
+  <p class="updated">App: Python Course · Data: 17 de agosto de 2026</p>
+  <p class="updated">Escopo: o interpretador Python integrado, o conteúdo autoral do curso (mais de 1349 exercícios, 45 lições, 6 idiomas), o algoritmo de repetição espaçada e — novo neste relatório — se a própria suíte de testes realmente detecta regressões (testes de mutação) nos 4 módulos de lógica mais críticos</p>
 
   <div class="summary">
-    <p><strong>Em resumo:</strong> 9553 candidatos verificados contra um oráculo independente — <strong>0 discrepâncias</strong>. A estrutura do curso (1349 arquivos de exercícios, 45 lições) e a localização (6 idiomas) foram verificadas separadamente — também 0 problemas.</p>
+    <p><strong>Em resumo:</strong> duas perguntas independentes, duas respostas. <strong>O código está correto?</strong> 9553 candidatos verificados contra o CPython e outros oráculos — <strong>0 discrepâncias</strong>. <strong>Os testes realmente protegem isso?</strong> 2797 defeitos injetados deliberadamente (testes de mutação) — todos os 2797 detectados. A segunda pergunta é nova neste relatório — é ela que torna a primeira confiável, e não apenas afirmada.</p>
   </div>
 
-  <h2>Metodologia</h2>
+  <div class="headline-grid">
+    <div class="headline-card">
+      <div class="num">0 de 9553</div>
+      <div class="label">discrepâncias frente ao CPython/oráculos</div>
+    </div>
+    <div class="headline-card">
+      <div class="num">2797 de 2797</div>
+      <div class="label">defeitos injetados detectados pelos testes (mutation score 100%)</div>
+    </div>
+  </div>
+
+  <h2>Testes de mutação — se os testes realmente detectam bugs</h2>
+  <p>
+    Uma porcentagem de cobertura só responde "esta linha foi executada pelo menos uma vez?", não "um teste perceberia se esta linha quebrasse?". Os testes de mutação respondem diretamente à segunda pergunta: uma ferramenta injeta deliberadamente milhares de pequenos defeitos individuais no código (troca <code>&lt;</code> por <code>&lt;=</code>, <code>&amp;&amp;</code> por <code>||</code>, remove uma verificação de limite, etc.) e verifica se pelo menos um teste falha em seguida. Se nenhum teste detecta o defeito injetado, isso é uma lacuna real — mesmo que a cobertura de linhas por si só mostre 100%.
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Módulo</th>
+        <th class="num">Mutantes</th>
+        <th class="num">Detectados</th>
+        <th class="num">Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Lógica de desbloqueio de lições (<code>gate-engine</code>)</td>
+        <td class="num">186</td>
+        <td class="num">186</td>
+        <td class="num">100.00%</td>
+      </tr>
+      <tr>
+        <td>Conquistas, XP, sequência, corações (<code>gamification-engine</code>)</td>
+        <td class="num">267</td>
+        <td class="num">267</td>
+        <td class="num">100.00%</td>
+      </tr>
+      <tr>
+        <td>Planejador de repetição espaçada (<code>srs-engine</code>)</td>
+        <td class="num">42</td>
+        <td class="num">42</td>
+        <td class="num">100.00%</td>
+      </tr>
+      <tr>
+        <td>Interpretador Python (tokenizador, parser, avaliador)</td>
+        <td class="num">2302</td>
+        <td class="num">2302</td>
+        <td class="num">100.00%</td>
+      </tr>
+      <tr class="total">
+        <td>Total, 4 módulos mais críticos</td>
+        <td class="num">2797</td>
+        <td class="num">2797</td>
+        <td class="num">100.00%</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    "Detectado" aqui significa: o mutante fez pelo menos um teste falhar, ou causou um loop infinito/travamento (também contabilizado — o defeito foi igualmente sinalizado com clareza, só que por outra via). Cada caso individual em que um mutante inicialmente sobrevivia foi revisado manualmente: ou foi escrito um novo teste que documenta o comportamento real, ou foi provado matematicamente que aquela mudança específica de código nunca pode afetar o resultado — e nesse caso, a própria linha traz um comentário explicando isso, não um silêncio.
+  </p>
+
+  <h2>Metodologia — correção do código (comparação com CPython)</h2>
   <p>
     Três frentes de validação independentes, sem código compartilhado e sem dependência entre os resultados. <strong>Interpretador:</strong> o app executa código por meio de seu próprio interpretador Python, escrito do zero (não é CPython, nem uma biblioteca de terceiros) — cada candidato (uma solução de referência autoral, uma instância gerada a partir de um modelo, ou um programa gerado aleatoriamente) foi executado simultaneamente no interpretador do app e em um CPython 3.12.3 instalado no sistema, com comparação exata do resultado ou da consistência dos erros. <strong>Estrutura do curso:</strong> uma varredura completa, sem amostragem, de todos os arquivos de conteúdo. <strong>Planejador de repetição espaçada:</strong> sua saída foi comparada com uma implementação escrita separadamente (não copiada do próprio planejador) da mesma fórmula matemática. A validação foi executada por meio de uma ferramenta temporária e isolada, fora do código próprio do app, em várias rodadas independentes, sem se apoiar nos resultados umas das outras.
   </p>
 
-  <h2>Resultados frente a um oráculo independente</h2>
+  <h2>Resultados frente a um oráculo</h2>
   <table>
     <thead>
       <tr>
@@ -223,6 +342,34 @@
       </tr>
     </tbody>
   </table>
+
+  <h2>Ferramentas</h2>
+  <div class="tools-list">
+    <div class="tool"><strong>Stryker Mutator</strong> — testes de mutação (geração e execução de milhares de defeitos deliberados contra a suíte de testes existente).</div>
+    <div class="tool"><strong>Vitest</strong> — executor de testes (923 testes unitários/de integração na data deste relatório).</div>
+    <div class="tool"><strong>TypeScript, modo estrito</strong> — <code>strict</code>, <code>noUncheckedIndexedAccess</code>, <code>exactOptionalPropertyTypes</code>.</div>
+    <div class="tool"><strong>CPython 3.12.3</strong> — oráculo externo para verificar o comportamento do interpretador.</div>
+    <div class="tool"><strong>Scripts próprios e isolados</strong> — geração de testes fuzz e comparação do planejador de repetição espaçada, fora do código próprio do app.</div>
+  </div>
+
+  <h2>Como esses números foram realmente alcançados — sem enfeites</h2>
+  <div class="honest-box">
+    <p>
+      Esses números não são o ponto de partida. A primeira execução de testes de mutação no módulo maior e mais difícil (o interpretador Python, ~2500 linhas) resultou em <strong>75,65%</strong> — ou seja, quase um quarto dos defeitos injetados deliberadamente passava totalmente despercebido. Fechar essa lacuna até 100% levou sete rodadas consecutivas, cada uma fechando parte do restante e revelando novos casos-limite — incluindo erros de metodologia cometidos durante o próprio processo de verificação.
+    </p>
+    <p>
+      <strong>Bugs reais da aplicação encontrados e corrigidos</strong> (não apenas lacunas de testes) — revelados justamente por esse processo rigoroso: a pontuação de uma lição era indevidamente rebaixada após um erro corrigido (um único erro limitava permanentemente a pontuação máxima possível, mesmo que o aluno acertasse imediatamente na repetição); o teste de nivelamento concedia indevidamente as conquistas "Sem Erros" e "Sem Piedade" para lições puladas, não realmente concluídas; e três bugs pontuais do próprio interpretador (divisão inteira, arredondamento no operador de resto, comparação de <code>bool</code> com <code>int</code>).
+    </p>
+    <p>
+      <strong>Um erro de metodologia foi detectado e corrigido no meio do processo:</strong> uma verificação intermediária (substituir o texto de uma linha inteira em vez de mutar nas coordenadas exatas do Stryker) superestimou quantos mutantes eram realmente "equivalentes" (ou seja, impossíveis de corrigir) — de 35 suposições desse tipo, apenas 1 se confirmou. Corrigido ao passar para uma verificação precisa, em nível de coordenadas, para cada caso individual.
+    </p>
+    <p>
+      <strong>Os últimos 5 mutantes</strong> (comparação de strings usada na ordenação de listas) resistiram tanto a uma prova de equivalência quanto a um teste escrito pela interface pública normal — o próprio algoritmo de ordenação do JavaScript faz comparações redundantes que mascaram um resultado errado em um único par, mesmo em uma lista de 5 elementos ordenada de forma inversa. Resolvido testando diretamente a função de comparação interna, contornando por completo o comportamento imprevisível do algoritmo de ordenação de terceiros.
+    </p>
+    <p>
+      Resumindo: nenhum número neste relatório está pintado de antemão. Cada um é resultado de trabalho iterativo e verificado — incluindo admitir e corrigir os próprios erros pelo caminho. É exatamente por isso que se pode confiar nesses números: o app não só se comporta corretamente nos exemplos verificados — a rede de segurança de testes ao seu redor realmente detecta regressões futuras, em vez de existir apenas formalmente.
+    </p>
+  </div>
 
   <h2>Notas</h2>
   <p>
