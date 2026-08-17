@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Independent Quality Report — Python Course</title>
+<title>Code Quality &amp; Reliability — Python Course</title>
 <meta name="robots" content="noindex, nofollow">
 <style>
   :root {
@@ -14,6 +14,10 @@
     --border: #e0e0e0;
     --accent: #4f46e5;
     --th-bg: #f5f5f7;
+    --good-bg: color-mix(in srgb, #16a34a 10%, transparent);
+    --good-border: color-mix(in srgb, #16a34a 35%, var(--border));
+    --honest-bg: color-mix(in srgb, #d97706 8%, transparent);
+    --honest-border: color-mix(in srgb, #d97706 30%, var(--border));
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -73,6 +77,11 @@
     border-bottom: 1px solid var(--border);
     padding-bottom: 0.4rem;
   }
+  h3 {
+    font-size: 1.02rem;
+    margin-top: 1.6rem;
+    margin-bottom: 0.5rem;
+  }
   p {
     margin: 0.6rem 0;
   }
@@ -103,6 +112,31 @@
   .summary p {
     margin: 0.3rem 0;
   }
+  .headline-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.9rem;
+    margin: 1.2rem 0 1.5rem;
+  }
+  .headline-card {
+    background: var(--good-bg);
+    border: 1px solid var(--good-border);
+    border-radius: 8px;
+    padding: 1rem 1.1rem;
+  }
+  .headline-card .num {
+    font-size: 1.9rem;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .headline-card .label {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 0.2rem;
+  }
+  @media (max-width: 520px) {
+    .headline-grid { grid-template-columns: 1fr; }
+  }
   table {
     width: 100%;
     border-collapse: collapse;
@@ -125,6 +159,30 @@
   tr.total td {
     font-weight: 700;
   }
+  .honest-box {
+    background: var(--honest-bg);
+    border: 1px solid var(--honest-border);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 1.2rem 0;
+  }
+  .honest-box p:first-child {
+    margin-top: 0;
+  }
+  .tools-list {
+    display: grid;
+    gap: 0.5rem;
+    margin: 1rem 0 1.5rem;
+  }
+  .tools-list .tool {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.6rem 0.9rem;
+  }
+  .tools-list .tool strong {
+    display: inline-block;
+    min-width: 9rem;
+  }
   footer {
     margin-top: 3rem;
     padding-top: 1rem;
@@ -139,15 +197,76 @@
 
   <nav class="lang-switch"><a href="index.html">УКР</a> · <span class="lang-switch__current">EN</span> · <a href="es.html">ES</a> · <a href="fr.html">FR</a> · <a href="de.html">DE</a> · <a href="pt.html">PT</a></nav>
 
-  <h1>Independent Quality Report</h1>
-  <p class="updated">App: Python Course · Date: August 15, 2026</p>
-  <p class="updated">Scope: the built-in Python interpreter, the authored curriculum content (1349+ exercises, 45 lessons, 6 languages), and the spaced-repetition scheduling algorithm</p>
+  <h1>Code Quality &amp; Reliability</h1>
+  <p class="updated">App: Python Course · Date: August 17, 2026</p>
+  <p class="updated">Scope: the built-in Python interpreter, the authored curriculum content (1349+ exercises, 45 lessons, 6 languages), the spaced-repetition scheduling algorithm, and — new in this report — whether the test suite itself actually catches regressions (mutation testing) across the 4 most critical logic modules</p>
 
   <div class="summary">
-    <p><strong>In short:</strong> 9,553 candidates checked against an independent oracle — <strong>0 discrepancies</strong>. Curriculum structure (1,349 exercise files, 45 lessons) and localization (6 languages) were checked separately — also 0 issues.</p>
+    <p><strong>In short:</strong> two separate questions, two answers. <strong>Is the code correct?</strong> 9,553 candidates checked against CPython and other oracles — 0 discrepancies. <strong>Do the tests actually protect that?</strong> 2,797 deliberately injected defects (mutation testing) — all 2,797 caught. The second question is new to this report — it's what makes the first one trustworthy rather than just asserted.</p>
   </div>
 
-  <h2>Methodology</h2>
+  <div class="headline-grid">
+    <div class="headline-card">
+      <div class="num">0 of 9,553</div>
+      <div class="label">discrepancies vs. CPython/oracles</div>
+    </div>
+    <div class="headline-card">
+      <div class="num">2,797 of 2,797</div>
+      <div class="label">injected defects caught by tests (100% mutation score)</div>
+    </div>
+  </div>
+
+  <h2>Mutation Testing — Do the Tests Actually Catch Bugs</h2>
+  <p>
+    A coverage percentage only answers "did this line execute at least once," not "would a test notice if this line broke." Mutation testing answers the second question directly: a tool deliberately injects thousands of small, individual defects into the code (flips <code>&lt;</code> to <code>&lt;=</code>, <code>&amp;&amp;</code> to <code>||</code>, removes a bounds check, and so on) and checks whether at least one test then fails. If no test catches the injected defect, that's a real gap — even when line coverage itself reads 100%.
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Module</th>
+        <th class="num">Mutants</th>
+        <th class="num">Caught</th>
+        <th class="num">Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Lesson-unlock gate logic (<code>gate-engine</code>)</td>
+        <td class="num">186</td>
+        <td class="num">186</td>
+        <td class="num">100.00%</td>
+      </tr>
+      <tr>
+        <td>Achievements, XP, streak, hearts (<code>gamification-engine</code>)</td>
+        <td class="num">267</td>
+        <td class="num">267</td>
+        <td class="num">100.00%</td>
+      </tr>
+      <tr>
+        <td>Spaced-repetition scheduler (<code>srs-engine</code>)</td>
+        <td class="num">42</td>
+        <td class="num">42</td>
+        <td class="num">100.00%</td>
+      </tr>
+      <tr>
+        <td>Python interpreter (tokenizer, parser, evaluator)</td>
+        <td class="num">2,302</td>
+        <td class="num">2,302</td>
+        <td class="num">100.00%</td>
+      </tr>
+      <tr class="total">
+        <td>Combined, 4 most critical modules</td>
+        <td class="num">2,797</td>
+        <td class="num">2,797</td>
+        <td class="num">100.00%</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    "Caught" here means a mutant either turned at least one test red, or caused an infinite loop/hang (also counted — the defect was still unambiguously flagged, just by a different signal). Every individual case where a mutant initially survived was reviewed by hand: either a new test was written that documents the real behavior, or it was mathematically proven that the specific code change can never affect the outcome at all — and in that case, the line itself carries a comment explaining why, not a silent pass.
+  </p>
+
+  <h2>Methodology — Code Correctness (CPython Cross-Check)</h2>
   <p>
     Three independent tracks, sharing no code and with no dependency between results. <strong>Interpreter:</strong> the app runs a custom, from-scratch Python interpreter (not CPython, not a third-party library) — every reference solution, template-generated instance, and randomly generated program was run simultaneously through the app's interpreter and a system-installed CPython 3.12.3, then compared for an exact result or error-consistency match. <strong>Curriculum structure:</strong> a full, non-sampled pass over every content file. <strong>Spaced-repetition scheduler:</strong> its output checked against a separately written implementation of the same formula. Validation ran through a temporary, isolated tool kept outside the app's own code, in several independent rounds run without referencing each other's results in advance.
   </p>
@@ -223,6 +342,34 @@
       </tr>
     </tbody>
   </table>
+
+  <h2>Tools</h2>
+  <div class="tools-list">
+    <div class="tool"><strong>Stryker Mutator</strong> — mutation testing (generating and running thousands of deliberate defects against the existing test suite).</div>
+    <div class="tool"><strong>Vitest</strong> — test runner (923 unit/integration tests as of this report).</div>
+    <div class="tool"><strong>TypeScript, strict mode</strong> — <code>strict</code>, <code>noUncheckedIndexedAccess</code>, <code>exactOptionalPropertyTypes</code>.</div>
+    <div class="tool"><strong>CPython 3.12.3</strong> — external oracle for checking interpreter behavior.</div>
+    <div class="tool"><strong>Custom isolated scripts</strong> — fuzz-test generation and spaced-repetition scheduler cross-checks, kept outside the app's own code.</div>
+  </div>
+
+  <h2>How These Numbers Were Actually Reached — No Gloss</h2>
+  <div class="honest-box">
+    <p>
+      These figures aren't where things started. The first mutation-testing pass on the largest, hardest module (the Python interpreter, ~2,500 lines) came back at <strong>75.65%</strong> — roughly a quarter of the deliberately injected defects went completely unnoticed. Closing that gap to 100% took seven consecutive passes, each one closing part of the remainder while surfacing new edge cases — including methodology mistakes made along the way, during the checking process itself.
+    </p>
+    <p>
+      <strong>Real application bugs found and fixed</strong> (not just test gaps) — surfaced specifically by this thorough process: lesson scores were being wrongly deflated after a corrected mistake (one wrong answer capped the maximum possible score, even if the learner immediately got the retry right); the placement test was wrongly granting the "Flawless Run" and "No Mercy" achievements for lessons that were skipped, not genuinely completed; and three narrow interpreter bugs (integer division, remainder-operator rounding, <code>bool</code>-vs-<code>int</code> comparison).
+    </p>
+    <p>
+      <strong>One methodology mistake was caught and corrected mid-process:</strong> an intermediate verification approach (replacing an entire line of text instead of mutating at Stryker's exact coordinates) overcounted how many mutants were truly "equivalent" (i.e., unfixable) — of 35 such assumptions, only 1 held up. Fixed by switching to precise, coordinate-level verification for every individual case.
+    </p>
+    <p>
+      <strong>The last 5 mutants</strong> (string comparison used by list sorting) resisted both a proof of equivalence and a test written through the normal public interface — JavaScript's own sort algorithm makes redundant comparisons that mask a single wrong pairwise result. Resolved by testing the internal comparison function directly, bypassing the third-party sort algorithm's unpredictable behavior entirely.
+    </p>
+    <p>
+      Bottom line: no number in this report is painted on. Every one is the result of iterative, verified work — including admitting and fixing our own mistakes along the way. That's exactly why these figures can be trusted: the app doesn't just behave correctly on the examples that were checked — the test safety net around it genuinely catches future regressions, rather than just formally existing.
+    </p>
+  </div>
 
   <h2>Notes</h2>
   <p>
